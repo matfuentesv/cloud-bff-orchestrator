@@ -2,7 +2,7 @@ package cl.veterinary.cloudbfforchestrator.service.impl;
 
 import cl.veterinary.cloudbfforchestrator.client.UserFunctionClient;
 import cl.veterinary.cloudbfforchestrator.model.User;
-import cl.veterinary.cloudbfforchestrator.service.OrchestratorService;
+import cl.veterinary.cloudbfforchestrator.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class OrchestratorServiceImpl implements OrchestratorService {
+public class UserServiceImpl implements UserService {
 
     @Autowired
     UserFunctionClient userFunctionClient;
