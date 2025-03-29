@@ -32,4 +32,19 @@ public class OrchestratorServiceImpl implements OrchestratorService {
         }
     }
 
+    @Override
+    public User saveUser(User user) {
+        return userFunctionClient.saveUser(user);
+    }
+
+    @Override
+    public User updateUser(Long id,User user) {
+        return userFunctionClient.updateUser(id,user);
+    }
+
+    @Override
+    public String deleteUser(Long id) {
+        return userFunctionClient.deteleUser(id);
+    }
+
 }

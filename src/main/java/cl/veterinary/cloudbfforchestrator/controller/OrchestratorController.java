@@ -27,5 +27,20 @@ public class OrchestratorController {
         return ResponseEntity.ok(orchestratorService.findUserById(id));
     }
 
+    @PostMapping("/saveUser")
+    public ResponseEntity<User> saveUser(@RequestBody User user ) {
+        return ResponseEntity.ok(orchestratorService.saveUser(user));
+    }
+
+    @PutMapping("/updateUser/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable Long id,@RequestBody User user ) {
+        return ResponseEntity.ok(orchestratorService.updateUser(id,user));
+    }
+
+    @DeleteMapping("/deleteUser/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable Long id) {
+        return ResponseEntity.ok(orchestratorService.deleteUser(id));
+    }
+
 
 }

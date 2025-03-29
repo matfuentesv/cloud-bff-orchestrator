@@ -8,4 +8,8 @@ public interface OrchestratorService {
 
     List<User>findAllUser();
     User findUserById(Long id);
+    User saveUser(User user);
+    User updateUser(Long id,User user);
+    String deleteUser(Long id);
+
 }
