@@ -3,12 +3,9 @@ package cl.veterinary.cloudbfforchestrator.service.impl;
 import cl.veterinary.cloudbfforchestrator.client.RolFunctionClient;
 import cl.veterinary.cloudbfforchestrator.client.RolGraphQLClient;
 import cl.veterinary.cloudbfforchestrator.model.GraphQLRequest;
-import cl.veterinary.cloudbfforchestrator.model.GraphQLRolResponse;
+import cl.veterinary.cloudbfforchestrator.model.GraphQLResponse;
 import cl.veterinary.cloudbfforchestrator.model.Rol;
-import cl.veterinary.cloudbfforchestrator.model.User;
 import cl.veterinary.cloudbfforchestrator.service.RolService;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -60,11 +57,10 @@ public class RolServiceImpl implements RolService {
     @Override
     public List<Rol> findAllRolGraphQL() {
 
-
-            String query = "{ getAllRoles { id nombre descripcion } }";
-            GraphQLRequest request = new GraphQLRequest(query);
-            ResponseEntity<GraphQLRolResponse> response = graphQLClient.executeQuery(request);
-            return Objects.requireNonNull(response.getBody()).getData().getGetAllRoles();
+        String query = "{ getAllRoles { id nombre descripcion } }";
+        GraphQLRequest request = new GraphQLRequest(query);
+        ResponseEntity<GraphQLResponse> response = graphQLClient.executeQuery(request);
+        return Objects.requireNonNull(response.getBody()).getData().getGetAllRoles();
 
     }
 
@@ -75,7 +71,7 @@ public class RolServiceImpl implements RolService {
         GraphQLRequest request = new GraphQLRequest(query);
 
 
-        ResponseEntity<GraphQLRolResponse> response = graphQLClient.executeQuery(request);
+        ResponseEntity<GraphQLResponse> response = graphQLClient.executeQuery(request);
         return response.getBody().getData().getGetRolById();
     }
 
@@ -99,7 +95,7 @@ public class RolServiceImpl implements RolService {
             GraphQLRequest request = new GraphQLRequest(query);
 
 
-            ResponseEntity<GraphQLRolResponse> response = graphQLClient.executeQuery(request);
+            ResponseEntity<GraphQLResponse> response = graphQLClient.executeQuery(request);
             return response.getBody().getData().getSaveRol();
     }
 
@@ -122,14 +118,13 @@ public class RolServiceImpl implements RolService {
 
             GraphQLRequest request = new GraphQLRequest(query);
 
-            ResponseEntity<GraphQLRolResponse> response = graphQLClient.executeQuery(request);
+            ResponseEntity<GraphQLResponse> response = graphQLClient.executeQuery(request);
             return response.getBody().getData().getUpdateRol();
     }
 
     @Override
     public String deleteRolGraphQL(Long id) {
 
-            // 1. Construir la mutación
             String query = String.format("""
             mutation {
               deleteRol(id: "%d")
@@ -137,7 +132,7 @@ public class RolServiceImpl implements RolService {
             """, id);
 
             GraphQLRequest request = new GraphQLRequest(query);
-            ResponseEntity<GraphQLRolResponse> response = graphQLClient.executeQuery(request);
+            ResponseEntity<GraphQLResponse> response = graphQLClient.executeQuery(request);
             return response.getBody().getData().getDeleteRol();
 
     }

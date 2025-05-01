@@ -6,10 +6,16 @@ import java.util.List;
 
 public interface UserService {
 
-    List<User>findAllUser();
-    User findUserById(Long id);
-    User saveUser(User user);
-    User updateUser(Long id,User user);
-    String deleteUser(Long id);
+    List<User>findAllUserRest();
+    User findUserByIdRest(Long id);
+    User saveUserRest(User user);
+    User updateUserRest(Long id,User user);
+    String deleteUserRest(Long id);
+
+    List<User>findAllUserGraphQl();
+    User findUserByIdGraphQl(Long id);
+    User saveUserGraphQl(User user);
+    User updateUserGraphQl(Long id,User user);
+    String deleteUserGraphQl(Long id);
 
 }

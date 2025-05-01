@@ -17,29 +17,54 @@ public class UserController {
     UserService userService;
 
 
-    @GetMapping("/findAllUser")
+    @GetMapping("/rest/findAllUser")
     public ResponseEntity<List<User>> findAllUser() {
-        return ResponseEntity.ok(userService.findAllUser());
+        return ResponseEntity.ok(userService.findAllUserRest());
     }
 
-    @GetMapping("/findUserById/{id}")
+    @GetMapping("/rest/findUserById/{id}")
     public ResponseEntity<User> findUserById(@PathVariable Long id ) {
-        return ResponseEntity.ok(userService.findUserById(id));
+        return ResponseEntity.ok(userService.findUserByIdRest(id));
     }
 
-    @PostMapping("/saveUser")
+    @PostMapping("/rest/saveUser")
     public ResponseEntity<User> saveUser(@RequestBody User user ) {
-        return ResponseEntity.ok(userService.saveUser(user));
+        return ResponseEntity.ok(userService.saveUserRest(user));
     }
 
-    @PutMapping("/updateUser/{id}")
+    @PutMapping("/rest/updateUser/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Long id,@RequestBody User user ) {
-        return ResponseEntity.ok(userService.updateUser(id,user));
+        return ResponseEntity.ok(userService.updateUserRest(id,user));
     }
 
-    @DeleteMapping("/deleteUser/{id}")
+    @DeleteMapping("/rest/deleteUser/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable Long id) {
-        return ResponseEntity.ok(userService.deleteUser(id));
+        return ResponseEntity.ok(userService.deleteUserRest(id));
+    }
+
+    @GetMapping("/graphQL/findAllUser")
+    public ResponseEntity<List<User>> findAllUserGraphQl() {
+        return ResponseEntity.ok(userService.findAllUserGraphQl());
+    }
+
+    @GetMapping("/graphQL/findUserById/{id}")
+    public ResponseEntity<User> findUserByIdGraphQl(@PathVariable Long id ) {
+        return ResponseEntity.ok(userService.findUserByIdGraphQl(id));
+    }
+
+    @PostMapping("/graphQL/saveUser")
+    public ResponseEntity<User> saveUserGraphQl(@RequestBody User user ) {
+        return ResponseEntity.ok(userService.saveUserGraphQl(user));
+    }
+
+    @PutMapping("/graphQL/updateUser/{id}")
+    public ResponseEntity<User> updateUserGraphQl(@PathVariable Long id,@RequestBody User user ) {
+        return ResponseEntity.ok(userService.updateUserGraphQl(id,user));
+    }
+
+    @DeleteMapping("/graphQL/deleteUser/{id}")
+    public ResponseEntity<String> deleteUserGraphQl(@PathVariable Long id) {
+        return ResponseEntity.ok(userService.deleteUserGraphQl(id));
     }
 
 

@@ -7,8 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name = "rolgraphqlClient", url = "https://faas-graphql-rol.azurewebsites.net")
-public interface RolGraphQLClient {
+@FeignClient(name = "usergraphqlClient", url = "https://faas-graphql-user.azurewebsites.net")
+public interface UserGraphQLClient {
 
     @PostMapping(value = "/api/graphql", consumes = "application/json")
     ResponseEntity<GraphQLResponse> executeQuery(@RequestBody GraphQLRequest request);
