@@ -8,10 +8,16 @@ import java.util.List;
 
 public interface RolService {
 
-    List<Rol> findAllRol();
-    Rol findRolById(Long id);
-    Rol saveRol(Rol rol);
-    Rol updateRol(Long id,Rol rol);
-    String deleteRol(Long id);
+    List<Rol> findAllRolRest();
+    Rol findRolByIdRest(Long id);
+    Rol saveRolRest(Rol rol);
+    Rol updateRolRest(Long id,Rol rol);
+    String deleteRolRest(Long id);
+
+    List<Rol> findAllRolGraphQL();
+    Rol findRolByIdGraphQL(Long id);
+    Rol saveRolGraphQL(Rol rol);
+    Rol updateRolGraphQL(Long id,Rol rol);
+    String deleteRolGraphQL(Long id);
 
 }

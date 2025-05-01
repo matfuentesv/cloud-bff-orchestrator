@@ -19,31 +19,56 @@ public class RolController {
     RolService rolService;
 
 
-    @GetMapping("/findAllRoles")
-    public ResponseEntity<List<Rol>> findAllRoles() {
-        return ResponseEntity.ok(rolService.findAllRol());
+    @GetMapping("/rest/findAllRoles")
+    public ResponseEntity<List<Rol>> findAllRolRest() {
+        return ResponseEntity.ok(rolService.findAllRolRest());
     }
 
-    @GetMapping("/findRolById/{id}")
-    public ResponseEntity<Rol> findRolById(@PathVariable Long id ) {
-        return ResponseEntity.ok(rolService.findRolById(id));
+    @GetMapping("/rest/findRolById/{id}")
+    public ResponseEntity<Rol> findRolByIdRest(@PathVariable Long id ) {
+        return ResponseEntity.ok(rolService.findRolByIdRest(id));
     }
 
-    @PostMapping("/saveRol")
-    public ResponseEntity<Rol> saveRol(@RequestBody Rol rol ) {
-        return ResponseEntity.ok(rolService.saveRol(rol));
+    @PostMapping("/rest/saveRol")
+    public ResponseEntity<Rol> saveRolRest(@RequestBody Rol rol ) {
+        return ResponseEntity.ok(rolService.saveRolRest(rol));
     }
 
-    @PutMapping("/updateRol/{id}")
-    public ResponseEntity<Rol> updateRol(@PathVariable Long id,@RequestBody Rol rol ) {
-        return ResponseEntity.ok(rolService.updateRol(id,rol));
+    @PutMapping("/rest/updateRol/{id}")
+    public ResponseEntity<Rol> updateRolRest(@PathVariable Long id,@RequestBody Rol rol ) {
+        return ResponseEntity.ok(rolService.updateRolRest(id,rol));
     }
 
-    @DeleteMapping("/deleteRol/{id}")
+    @DeleteMapping("/rest/deleteRolRest/{id}")
     public ResponseEntity<String> deleteRol(@PathVariable Long id) {
-        return ResponseEntity.ok(rolService.deleteRol(id));
+        return ResponseEntity.ok(rolService.deleteRolRest(id));
     }
 
+
+    @GetMapping("/graphQL/findAllRoles")
+    public ResponseEntity<List<Rol>> findAllRolRestQL() {
+        return ResponseEntity.ok(rolService.findAllRolGraphQL());
+    }
+
+    @GetMapping("graphQL/findRolById/{id}")
+    public ResponseEntity<Rol> findRolByIdGraphQL(@PathVariable Long id ) {
+        return ResponseEntity.ok(rolService.findRolByIdGraphQL(id));
+    }
+
+    @PostMapping("/graphQL/saveRol")
+    public ResponseEntity<Rol> saveRolGraphQL(@RequestBody Rol rol ) {
+        return ResponseEntity.ok(rolService.saveRolGraphQL(rol));
+    }
+
+    @PutMapping("/graphQL/updateRol/{id}")
+    public ResponseEntity<Rol> updateRolGraphQL(@PathVariable Long id,@RequestBody Rol rol ) {
+        return ResponseEntity.ok(rolService.updateRolGraphQL(id,rol));
+    }
+
+    @DeleteMapping("/graphQL/deleteRolRest/{id}")
+    public ResponseEntity<String> deleteRolGraphQL(@PathVariable Long id) {
+        return ResponseEntity.ok(rolService.deleteRolGraphQL(id));
+    }
 
 
 }
