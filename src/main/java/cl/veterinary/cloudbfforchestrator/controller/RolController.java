@@ -39,7 +39,7 @@ public class RolController {
         return ResponseEntity.ok(rolService.updateRolRest(id,rol));
     }
 
-    @DeleteMapping("/rest/deleteRolRest/{id}")
+    @DeleteMapping("/rest/deleteRol/{id}")
     public ResponseEntity<String> deleteRol(@PathVariable Long id) {
         return ResponseEntity.ok(rolService.deleteRolRest(id));
     }
@@ -65,7 +65,7 @@ public class RolController {
         return ResponseEntity.ok(rolService.updateRolGraphQL(id,rol));
     }
 
-    @DeleteMapping("/graphQL/deleteRolRest/{id}")
+    @DeleteMapping("/graphQL/deleteRol/{id}")
     public ResponseEntity<String> deleteRolGraphQL(@PathVariable Long id) {
         return ResponseEntity.ok(rolService.deleteRolGraphQL(id));
     }
