@@ -1,10 +1,14 @@
 package cl.veterinary.cloudbfforchestrator.service.impl;
 
+import cl.veterinary.cloudbfforchestrator.client.RolFunctionClient;
+import cl.veterinary.cloudbfforchestrator.client.RolGraphQLClient;
 import cl.veterinary.cloudbfforchestrator.client.UserFunctionClient;
 import cl.veterinary.cloudbfforchestrator.client.UserGraphQLClient;
 import cl.veterinary.cloudbfforchestrator.model.GraphQLRequest;
 import cl.veterinary.cloudbfforchestrator.model.GraphQLResponse;
+import cl.veterinary.cloudbfforchestrator.model.Rol;
 import cl.veterinary.cloudbfforchestrator.model.User;
+import cl.veterinary.cloudbfforchestrator.service.RolService;
 import cl.veterinary.cloudbfforchestrator.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -22,6 +27,12 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserGraphQLClient userGraphQLClient;
+
+    @Autowired
+    RolFunctionClient rolFunctionClient;
+
+    @Autowired
+    private RolService rolService;
 
 
     @Override
@@ -53,6 +64,45 @@ public class UserServiceImpl implements UserService {
     @Override
     public String deleteUserRest(Long id) {
         return userFunctionClient.deteleUser(id);
+    }
+
+    @Override
+    public User saveUserWithDefaultRoleRest(User user) {
+        if (user.getRol() == null || user.getRol().getId() == null) {
+            // Buscar el rol por defecto, por nombre o ID
+            Rol defaultRol = rolFunctionClient.findRolById(2L)
+                    .orElseThrow(() -> new RuntimeException("Rol por defecto no encontrado"));
+            user.setRol(defaultRol);
+        }
+
+        // Ahora guardar el usuario con el rol ya asignado
+        return userFunctionClient.saveUser(user);
+    }
+
+    @Override
+    public String deleteRolAndUserRest(Long idRol) {
+
+        List<User> allUsers = userFunctionClient.getUserAll();
+
+
+        List<User> usersWithRol = allUsers.stream()
+                .filter(u -> u.getRol() != null && u.getRol().getId().equals(idRol))
+                .toList();
+
+        // 3. Obtener rol por defecto alternativo (ej: ID 1)
+        Rol defaultRol = new Rol();
+        defaultRol.setId(3L);
+        defaultRol.setNombre("Default");
+        defaultRol.setDescripcion("Rol asignado por defecto al eliminar otro");
+
+        // 4. Reasignar ese rol
+        for (User user : usersWithRol) {
+            user.setRol(defaultRol);
+            userFunctionClient.updateUser(user.getId(), user);
+        }
+
+        // 5. Eliminar el rol original
+        return rolFunctionClient.deteleRol(idRol);
     }
 
     @Override
@@ -200,5 +250,19 @@ public class UserServiceImpl implements UserService {
         ResponseEntity<GraphQLResponse> response = userGraphQLClient.executeQuery(request);
         return response.getBody().getData().getDeleteUser();
     }
+
+    @Override
+    public User saveUserWithDefaultRoleGraphQl(User user) {
+        if (user.getRol() == null || user.getRol().getId() == null) {
+            // Buscar el rol por defecto, por nombre o ID
+            Rol defaultRol = rolService.findRolByIdGraphQL(2L);
+            user.setRol(defaultRol);
+        }
+
+        // Ahora guardar el usuario con el rol ya asignado
+        return userFunctionClient.saveUser(user);
+    }
+
+
 
 }

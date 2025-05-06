@@ -11,11 +11,14 @@ public interface UserService {
     User saveUserRest(User user);
     User updateUserRest(Long id,User user);
     String deleteUserRest(Long id);
+    User saveUserWithDefaultRoleRest(User user);
+    String deleteRolAndUserRest(Long idRol);
+
 
     List<User>findAllUserGraphQl();
     User findUserByIdGraphQl(Long id);
     User saveUserGraphQl(User user);
     User updateUserGraphQl(Long id,User user);
     String deleteUserGraphQl(Long id);
-
+    User saveUserWithDefaultRoleGraphQl(User user);
 }

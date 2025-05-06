@@ -27,10 +27,16 @@ public class UserController {
         return ResponseEntity.ok(userService.findUserByIdRest(id));
     }
 
+    @PostMapping("/rest/saveUserWithDefaultRole")
+    public ResponseEntity<User> saveUserWithDefaultRoleRest(@RequestBody User user ) {
+        return ResponseEntity.ok(userService.saveUserWithDefaultRoleRest(user));
+    }
+
     @PostMapping("/rest/saveUser")
     public ResponseEntity<User> saveUser(@RequestBody User user ) {
         return ResponseEntity.ok(userService.saveUserRest(user));
     }
+
 
     @PutMapping("/rest/updateUser/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Long id,@RequestBody User user ) {
@@ -40,6 +46,11 @@ public class UserController {
     @DeleteMapping("/rest/deleteUser/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable Long id) {
         return ResponseEntity.ok(userService.deleteUserRest(id));
+    }
+
+    @DeleteMapping("/rest/deleteRolAndUser/{id}")
+    public ResponseEntity<String> deleteRolAndUserRest(@PathVariable Long id) {
+        return ResponseEntity.ok(userService.deleteRolAndUserRest(id));
     }
 
     @GetMapping("/graphQL/findAllUser")
@@ -57,6 +68,11 @@ public class UserController {
         return ResponseEntity.ok(userService.saveUserGraphQl(user));
     }
 
+    @PostMapping("/graphQL/saveUserWithDefaultRole")
+    public ResponseEntity<User> saveUserWithDefaultRoleGraphQl(@RequestBody User user ) {
+        return ResponseEntity.ok(userService.saveUserWithDefaultRoleGraphQl(user));
+    }
+
     @PutMapping("/graphQL/updateUser/{id}")
     public ResponseEntity<User> updateUserGraphQl(@PathVariable Long id,@RequestBody User user ) {
         return ResponseEntity.ok(userService.updateUserGraphQl(id,user));
@@ -65,6 +81,11 @@ public class UserController {
     @DeleteMapping("/graphQL/deleteUser/{id}")
     public ResponseEntity<String> deleteUserGraphQl(@PathVariable Long id) {
         return ResponseEntity.ok(userService.deleteUserGraphQl(id));
+    }
+
+    @DeleteMapping("/graphQL/deleteRolAndUser/{id}")
+    public ResponseEntity<String> deleteRolAndUserGraphQl(@PathVariable Long id) {
+        return ResponseEntity.ok(userService.deleteRolAndUserGraphQl(id));
     }
 
 
