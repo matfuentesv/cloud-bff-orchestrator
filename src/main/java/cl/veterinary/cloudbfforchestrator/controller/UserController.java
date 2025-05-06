@@ -83,10 +83,7 @@ public class UserController {
         return ResponseEntity.ok(userService.deleteUserGraphQl(id));
     }
 
-    @DeleteMapping("/graphQL/deleteRolAndUser/{id}")
-    public ResponseEntity<String> deleteRolAndUserGraphQl(@PathVariable Long id) {
-        return ResponseEntity.ok(userService.deleteRolAndUserGraphQl(id));
-    }
+
 
 
 }
